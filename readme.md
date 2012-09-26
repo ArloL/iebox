@@ -1,4 +1,4 @@
-# IEBox
+# iebox
 
 An improved installer of the [IE Application Compatibility
 VMs](https://www.microsoft.com/en-ca/download/details.aspx?id=11575) for Linux
