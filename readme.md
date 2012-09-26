@@ -55,6 +55,8 @@ These are the standard names also showing the operating system:
 *   IE8: *Windows 7 IE8*
 *   IE9: *Windows 7 IE9*
 
+There are also [advanced options](#advanced-options).
+
 ### IE6 VM Network Drivers
 
 When installing the IE6 VM, you **have** to install the network drivers upon
@@ -90,7 +92,7 @@ If one of the comically large files fails to download, the `curl`
 command used will automatically attempt to resume where it left off. 
 Thanks, [rcmachado](https://github.com/rcmachado).
 
-### Recovering from a failed installation
+### Recovering from a Failed Installation
 
 Each version is downloaded into a subdirectory of `~/.iebox/vhd`. For example
 `~/.iebox/vhd/ie6`. If the installation fails for any reason (e.g. corrupted download),
@@ -101,7 +103,6 @@ delete it and double check to delete all files from VirtualBox's default machine
 
 If nothing else, you can delete `~/.iebox` and rerun the install without
 worrying about existing VMs (see [a note on directories](#a-note-on-directories)).
-
 
 ## Notes
 
@@ -150,7 +151,7 @@ installers.
     ./iebox.sh -v 8
     ./iebox.sh -v 9
 
-## Major differences to ievms
+## Major Differences to ievms
 
 The goal was to make the shell script easier to use and more flexible.
 
@@ -161,19 +162,17 @@ The goal was to make the shell script easier to use and more flexible.
     when you have VMs installed (see next point).
 *   Every VM's hard drive is copied to VirtualBox's default folder.
 
-## Advanced options
+## Advanced Options
 
-### Specifying the download path
+### Specifying the Download Path
 
 To specify where the required files are downloaded, use the `-d` parameter:
 
     ./iebox.sh -v 6 -d "/path/to/download/folder"
 
-
-### Passing additional options to curl
+### Passing Additional Options to curl
 
 The `curl` command is passed any options present in the `-c` parameter.
 For example, you can set a download speed limit:
 
-    ./iebox.sh -v 6 -c "--limit-rate 50k" 
-
+    ./iebox.sh -v 6 -c "--limit-rate 50k"
