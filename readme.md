@@ -12,7 +12,7 @@ It is a fork of [ievms](http://xdissent.github.com/ievms/).
 machines](https://www.microsoft.com/en-ca/download/details.aspx?id=11575) (VMs)
 for testing websites in different Internet Explorer (IE) versions. Unfortunately setting
 these virtual machines (VMs) up without
-[Windows Virtual PC](https://www.microsoft.com/windows/virtual-pc/) is cumbersome. IEBox
+[Windows Virtual PC](https://www.microsoft.com/windows/virtual-pc/) is cumbersome. iebox
 aims to facilitate that process using [VirtualBox](http://virtualbox.org/) on Linux or
 OS&nbsp;X. With a single command, you can have a running VM of either IE6, IE7, IE8 or
 IE9.
