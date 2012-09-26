@@ -91,9 +91,12 @@ Thanks, [rcmachado](https://github.com/rcmachado).
 
 ### Recovering from a failed installation
 
-Each version is installed into a subdirectory of `~/.iebox/vhd/`. If the installation
-fails for any reason (corrupted download, for instance), delete the version-specific
-subdirectory and rerun the install.
+Each version is downloaded into a subdirectory of `~/.iebox/vhd`. For example
+`~/.iebox/vhd/ie6`. If the installation fails for any reason (e.g. corrupted download),
+delete the version-specific subdirectory and rerun the install.
+
+If that does not help, try and see if VirtualBox already is listing the VM. If yes,
+delete it and double check to delete all files from VirtualBox's default machine folder.
 
 If nothing else, you can delete `~/.iebox` and rerun the install without
 worrying about existing VMs (see [a note on directories](#a-note-on-directories)).
