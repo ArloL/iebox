@@ -12,6 +12,17 @@ log()  { printf "$*\n" ; return $? ;  }
 
 fail() { log "\nERROR: $*\n" ; exit 1 ; }
 
+usage() {
+cat << EOF
+usage: $0 options
+
+OPTIONS:
+   -h      Show this message
+   -n      Set the name of the virtual machine
+   -v      Choose the version
+EOF
+}
+
 check_parameters() {
     def_vm_version=0
     vm_version=${param_version:-$def_vm_version}
@@ -328,14 +339,29 @@ build_and_attach_drivers() {
     VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium "${iebox_home}/drivers.iso"
 }
 
-while getopts "n:v:" opt; do
+param_name=
+param_version=
+while getopts "hn:v:" opt; do
   case $opt in
+  h)
+    usage
+    exit 1
+    ;;
   n) param_name=$OPTARG ;;
   v) param_version=$OPTARG ;;
-  \?) fail "Invalid option: -$OPTARG" ;;
-  :) fail "Option -$OPTARG requires an argument." ;;
+  ?)
+    usage
+    exit 1
+    ;;
   esac
 done
+
+if [[ -z $param_version ]]
+then
+  log "Missing version parameter\n"
+  usage
+exit 1
+fi
 
 check_parameters
 check_system
