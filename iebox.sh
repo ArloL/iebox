@@ -40,7 +40,7 @@ check_parameters() {
 
 create_home() {
     def_iebox_home="${HOME}/.iebox"
-    iebox_home=${INSTALL_PATH:-$def_iebox_home}
+    iebox_home=${DOWNLOAD_PATH:-$def_iebox_home}
 
     mkdir -p "${iebox_home}"
     cd "${iebox_home}"
@@ -62,11 +62,11 @@ check_virtualbox() {
 
 get_virtualbox_standard_folder() {
     vbox_machinefolder=$(VBoxManage list systemproperties \
-            | awk '/^Default.machine.folder/ { print $4 }')
+        | awk '/^Default.machine.folder/ { print $4 }')
     
     if [[ ! -d "${vbox_machinefolder}" ]]
     then
-        fail "Hello"
+        fail "The VirtualBox machinefolder ${vbox_machinefolder} does not exist"
     fi
 }
 
@@ -272,8 +272,8 @@ build_ievm() {
         VBoxManage modifyvm "${vm_name}" --memory 256 --vram 32
         VBoxManage storagectl "${vm_name}" --name "IDE Controller" --add ide --controller PIIX4 --bootable on
         
-        log "Copying ${vhd_path}/${vhd} to ${vbox_machinefolder}/${vm_name}/${vhd}"
-        cp "${vhd_path}/${vhd}" "${vbox_machinefolder}/${vm_name}/${vhd}"
+        log "Moving ${vhd_path}/${vhd} to ${vbox_machinefolder}/${vm_name}/${vhd}"
+        mv "${vhd_path}/${vhd}" "${vbox_machinefolder}/${vm_name}/${vhd}"
         VBoxManage internalcommands sethduuid "${vbox_machinefolder}/${vm_name}/${vhd}"
         VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium "${vbox_machinefolder}/${vm_name}/${vhd}"
         
@@ -289,7 +289,7 @@ build_ievm_ie6() {
 
     if [[ ! -f "${iebox_home}/drivers/PRO2KXP.exe" ]]
     then
-        download_driver "http://downloadmirror.intel.com/8659/eng/PRO2KXP.exe" "Downloading 82540EM network adapter driver"
+        download_driver "http://downloadmirror.intel.com/8659/eng/PRO2KXP.exe"
 
         if [[ ! -f "${iebox_home}/drivers/autorun.inf" ]]
         then
@@ -312,7 +312,7 @@ download_driver() {
         mkdir -p "${iebox_home}/drivers"
     fi
 
-    log $2
+    log "Downloading 82540EM network adapter driver"
 
     cd "${iebox_home}/drivers"
     # Currently the IE6 driver download server doesn't support resume
@@ -328,7 +328,6 @@ build_and_attach_drivers() {
     if [[ ! -f "${iebox_home}/drivers.iso" ]]
     then
       log "Writing drivers ISO"
-
       
       case $kernel in
           Darwin) hdiutil makehybrid "${iebox_home}/drivers" -o "${iebox_home}/drivers.iso" ;;
@@ -337,6 +336,8 @@ build_and_attach_drivers() {
     fi
 
     VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium "${iebox_home}/drivers.iso"
+    
+    log "!! Don't forget to install the drivers on first boot !!"
 }
 
 param_name=
