@@ -6,8 +6,6 @@ set -o errtrace
 set -o errexit
 set -o pipefail
 
-curl_opts=${CURL_OPTS:-""}
-
 log()  { printf "$*\n" ; return $? ;  }
 
 fail() { log "\nERROR: $*\n" ; exit 1 ; }
@@ -24,6 +22,8 @@ EOF
 }
 
 check_parameters() {
+    curl_opts=${param_curl:-""}
+
     def_vm_version=0
     vm_version=${param_version:-$def_vm_version}
     
@@ -40,7 +40,7 @@ check_parameters() {
 
 create_home() {
     def_iebox_home="${HOME}/.iebox"
-    iebox_home=${DOWNLOAD_PATH:-$def_iebox_home}
+    iebox_home=${param_download:-$def_iebox_home}
 
     mkdir -p "${iebox_home}"
     cd "${iebox_home}"
@@ -342,8 +342,12 @@ build_and_attach_drivers() {
 
 param_name=
 param_version=
-while getopts "hn:v:" opt; do
+param_curl=
+param_download=
+while getopts "hn:v:c:d:" opt; do
   case $opt in
+  c) param_curl=$OPTARG ;;
+  d) param_download=$OPTARG ;;
   h)
     usage
     exit 1

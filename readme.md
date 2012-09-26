@@ -163,17 +163,17 @@ The goal was to make the shell script easier to use and more flexible.
 
 ## Advanced options
 
-### Specifying the install path
+### Specifying the download path
 
-To specify where the required files are downloaded, use the `DOWNLOAD_PATH` variable:
+To specify where the required files are downloaded, use the `-d` parameter:
 
-    DOWNLOAD_PATH="/path/to/install/path" ./iebox.sh
+    ./iebox.sh -v 6 -d "/path/to/download/folder"
 
 
 ### Passing additional options to curl
 
-The `curl` command is passed any options present in the `CURL_OPTS`
-environment variable. For example, you can set a download speed limit:
+The `curl` command is passed any options present in the `-c` parameter.
+For example, you can set a download speed limit:
 
-    CURL_OPTS="--limit-rate 50k" ./iebox.sh
+    ./iebox.sh -v 6 -c "--limit-rate 50k" 
 
