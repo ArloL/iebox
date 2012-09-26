@@ -60,7 +60,7 @@ These are the standard names also showing the operating system:
 When installing the IE6 VM, you **have** to install the network drivers upon
 **first boot**. The drivers are already mounted as a CD in the VM.
 
-If you don't install the drivers on first boot an activation
+If you don't install the drivers on first boot, an activation
 loop will prevent subsequent logins forever. If this happens, restoring to
 the `clean` snapshot will reset the activation lock.
 
