@@ -62,16 +62,10 @@ When installing the IE6 VM, you **have** to install the network drivers upon
 
 If you don't install the drivers on first boot, an activation
 loop will prevent subsequent logins forever. If this happens, restoring to
-the `clean` snapshot will reset the activation lock.
+the `clean` snapshot (see [clean snapshot](#clean-snapshot)) will reset the activation
+lock.
 
-### Clean Snapshot
-
-A snapshot is automatically taken upon install, allowing you to easily revert
-**all** changes made to the VM. Anything can go wrong in  Windows and rather
-than having to worry about maintaining a stable VM, you can simply revert
-to the `clean` snapshot.
-
-### IE7, IE8, IE9 Windows Activation
+### Activation of IE7, IE8 and IE9 VMs
 
 In contrast to the Windows XP IE6 VM you can not activate the Windows Vista and
 Windows 7 VMs. However there is a command that either resets the 30 day activation
@@ -81,7 +75,14 @@ back to it's initial state:
     slmgr –rearm
 
 I can not confirm the second behavior. In doubt revert the VM to the `clean` snapshot
-(see [above](#clean-snapshot)).
+(see [clean snapshot](#clean-snapshot)).
+
+### Clean Snapshot
+
+A snapshot is automatically taken upon install, allowing you to easily revert
+**all** changes made to the VM. Anything can go wrong in  Windows and rather
+than having to worry about maintaining a stable VM, you can simply revert
+to the `clean` snapshot.
 
 ### Resuming Downloads
 
