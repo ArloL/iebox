@@ -1,21 +1,21 @@
 # IEBox
 
-An improved automated installer of the Internet Explorer (IE) [Application Compatibility
-VPC images](https://www.microsoft.com/en-ca/download/details.aspx?id=11575) for Linux
-or OS&nbsp;X using [VirtualBox](http://virtualbox.org/).
-It was *heavily* inspired by [ievms](http://xdissent.github.com/ievms/).
+An improved installer of the [IE Application Compatibility
+VMs](https://www.microsoft.com/en-ca/download/details.aspx?id=11575) for Linux
+and OS&nbsp;X using [VirtualBox](http://virtualbox.org/).
 
-
+It is a fork of [ievms](http://xdissent.github.com/ievms/).
 
 ## Motivation
 
 [Microsoft](https://www.microsoft.com) provides *free* [virtual
 machines](https://www.microsoft.com/en-ca/download/details.aspx?id=11575) (VMs)
-for testing websites in different IE versions. Unfortunately setting these VMs up without
-[Windows Virtual PC](https://www.microsoft.com/windows/virtual-pc/) is
-cumbersome. IEBox aims to facilitate that process using
-[VirtualBox](http://virtualbox.org/) on Linux or OS&nbsp;X. With a single command, you can
-have a running VM of either IE6, IE7, IE8 or IE9.
+for testing websites in different Internet Explorer (IE) versions. Unfortunately setting
+these virtual machines (VMs) up without
+[Windows Virtual PC](https://www.microsoft.com/windows/virtual-pc/) is cumbersome. IEBox
+aims to facilitate that process using [VirtualBox](http://virtualbox.org/) on Linux or
+OS&nbsp;X. With a single command, you can have a running VM of either IE6, IE7, IE8 or
+IE9.
 
 ## Requirements
 
