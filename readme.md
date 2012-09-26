@@ -4,23 +4,26 @@ Inspired by [ievms](https://github.com/xdissent/ievms).
 
 ## Major differences to ievms
 
-*   You only install one image at a time.
+*   You only install one VM at a time.
+*   Use of command line parameters rather than environment variables.
 *   You can choose the name of the VM.
-*   Only temporary files in `~/.iebox`. It can safely be removed.
-*   Command line parameters rather than environment variables.
+*   Only temporary files are saved in `~/.iebox` making it safe to be removed.
+    The VMs are installed in the default VBox machine folder.
 
 ## Usage
 
     ./iebox.sh -v 6
 
-This will download everything to `~/.iebox` and install the IE6 image as
-the VM *Windows XP IE6*.
+This will download all the necessary files to `~/.iebox` and install
+the IE6 image as the VM *Windows XP IE6*.
 
 You can also name the VM yourself:
 
     ./iebox.sh -v 6 -n "Windows XP IE7"
 
-That gives you an easy way to use the **smaller** Windows XP IE6 image for IE7.
+That gives you an easy way to use the **smaller** Windows XP IE6 VM for IE7.
+It of course does not automatically install IE7 but the VM includes the
+installer as well as a direct shortcut on the desktop.
 
 To install the best combination in terms of disk space use the
 `best-combination.sh` shell script:
