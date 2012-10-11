@@ -278,6 +278,10 @@ build_ievm() {
         VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium "${vbox_machinefolder}/${vm_name}/${vhd}"
         
         VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 0 --device 1 --type dvddrive --medium "${ga_iso}"
+        
+        VBoxManage modifyvm "${vm_name}" --nic2 hostonly
+        VBoxManage modifyvm "${vm_name}" --hostonlyadapter2 "vboxnet0"
+        VBoxManage modifyvm "${vm_name}" --clipboard bidirectional
         declare -F "build_ievm_ie${vm_version}" && "build_ievm_ie${vm_version}"
         VBoxManage snapshot "${vm_name}" take clean --description "The initial VM state"
     fi
@@ -302,6 +306,7 @@ build_ievm_ie6() {
 
     log "Changing network adapter to 82540EM"
     VBoxManage modifyvm "${vm_name}" --nictype1 "82540EM"
+    VBoxManage modifyvm "${vm_name}" --nictype2 "82540EM"
 
     build_and_attach_drivers
 }
