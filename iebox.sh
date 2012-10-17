@@ -62,7 +62,7 @@ check_virtualbox() {
 
 get_virtualbox_standard_folder() {
     vbox_machinefolder=$(VBoxManage list systemproperties \
-        | awk '/^Default.machine.folder/ { print $4 }')
+        | sed -n 's/Default machine folder: *//p')
     
     if [[ ! -d "${vbox_machinefolder}" ]]
     then
