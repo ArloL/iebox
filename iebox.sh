@@ -272,6 +272,9 @@ build_ievm() {
         VBoxManage modifyvm "${vm_name}" --memory 256 --vram 32
         VBoxManage storagectl "${vm_name}" --name "IDE Controller" --add ide --controller PIIX4 --bootable on
         
+		log "Make directory ${vbox_machinefolder}/${vm_name}"
+		mkdir "${vbox_machinefolder}/${vm_name}"
+		
         log "Moving ${vhd_path}/${vhd} to ${vbox_machinefolder}/${vm_name}/${vhd}"
         mv "${vhd_path}/${vhd}" "${vbox_machinefolder}/${vm_name}/${vhd}"
         VBoxManage internalcommands sethduuid "${vbox_machinefolder}/${vm_name}/${vhd}"
