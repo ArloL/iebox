@@ -57,7 +57,7 @@ check_system() {
 
 check_virtualbox() {
     log "Checking for VirtualBox"
-    hash VBoxManage 2>&- || fail "VirtualBox is not installed! (http://virtualbox.org)"
+    hash VBoxManage 2>/dev/null || fail "VirtualBox is not installed! (http://virtualbox.org)"
 }
 
 get_virtualbox_standard_folder() {
@@ -144,7 +144,7 @@ download_unrar() {
             "tar command returned error code $?"
     fi
 
-    hash unrar 2>&- || fail "Could not find unrar in ${iebox_home}/rar/"
+    hash unrar 2>/dev/null || fail "Could not find unrar in ${iebox_home}/rar/"
 }
 
 download_cabextract() {
@@ -167,17 +167,17 @@ download_cabextract() {
     cd "${iebox_home}/cabextract/cabextractinstall.pkg"
     gzcat Payload | cpio -i --quiet
     cd "${iebox_home}"
-    hash cabextract 2>&- || fail "Could not find cabextract in ${iebox_home}/cabextract/cabextractinstall.pkg/usr/local/bin"
+    hash cabextract 2>/dev/null || fail "Could not find cabextract in ${iebox_home}/cabextract/cabextractinstall.pkg/usr/local/bin"
 }
 
 check_unrar() {
     PATH="${PATH}:${iebox_home}/rar"
-    hash unrar 2>&- || install_unrar
+    hash unrar 2>/dev/null || install_unrar
 }
 
 check_cabextract() {
     PATH="${PATH}:${iebox_home}/cabextract/cabextractinstall.pkg/usr/local/bin"
-    hash cabextract 2>&- || install_cabextract
+    hash cabextract 2>/dev/null || install_cabextract
 }
 
 build_ievm() {
