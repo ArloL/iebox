@@ -272,8 +272,8 @@ build_ievm() {
         VBoxManage modifyvm "${vm_name}" --memory 256 --vram 32
         VBoxManage storagectl "${vm_name}" --name "IDE Controller" --add ide --controller PIIX4 --bootable on
         
-        log "Moving ${vhd_path}/${vhd} to ${vbox_machinefolder}/${vm_name}/${vhd}"
-        mv "${vhd_path}/${vhd}" "${vbox_machinefolder}/${vm_name}/${vhd}"
+        log "Copying ${vhd_path}/${vhd} to ${vbox_machinefolder}/${vm_name}/${vhd}"
+        cp "${vhd_path}/${vhd}" "${vbox_machinefolder}/${vm_name}/${vhd}"
         VBoxManage internalcommands sethduuid "${vbox_machinefolder}/${vm_name}/${vhd}"
         VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium "${vbox_machinefolder}/${vm_name}/${vhd}"
         
