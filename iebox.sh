@@ -26,7 +26,7 @@ check_parameters() {
 
     def_vm_version=0
     vm_version=${param_version:-$def_vm_version}
-    
+
     case $vm_version in
     6) def_vm_name="Windows XP IE6" ;;
     7) def_vm_name="Windows Vista IE7" ;;
@@ -34,7 +34,7 @@ check_parameters() {
     9) def_vm_name="Windows 7 IE9" ;;
     *) fail "Invalid IE version: $vm_version" ;;
     esac
-    
+
     vm_name=${param_name:-$def_vm_name}
 }
 
@@ -63,7 +63,7 @@ check_virtualbox() {
 get_virtualbox_standard_folder() {
     vbox_machinefolder=$(VBoxManage list systemproperties \
         | sed -n 's/Default machine folder: *//p')
-    
+
     if [[ ! -d "${vbox_machinefolder}" ]]
     then
         fail "The VirtualBox machinefolder ${vbox_machinefolder} does not exist"
@@ -184,23 +184,23 @@ build_ievm() {
     extract_cmd="unrar e -y"
 
     case $vm_version in
-        6) 
+        6)
             urls="http://download.microsoft.com/download/B/7/2/B72085AE-0F04-4C6F-9182-BF1EE90F5273/Windows_XP_IE6.exe"
             vhd="Windows XP.vhd"
             vm_type="WindowsXP"
             extract_cmd="cabextract"
             ;;
-        7) 
+        7)
             urls=`echo http://download.microsoft.com/download/B/7/2/B72085AE-0F04-4C6F-9182-BF1EE90F5273/Windows_Vista_IE7.part0{1.exe,2.rar,3.rar,4.rar,5.rar,6.rar}`
             vhd="Windows Vista.vhd"
             vm_type="WindowsVista"
             ;;
-        8) 
+        8)
             urls=`echo http://download.microsoft.com/download/B/7/2/B72085AE-0F04-4C6F-9182-BF1EE90F5273/Windows_7_IE8.part0{1.exe,2.rar,3.rar,4.rar}`
             vhd="Win7_IE8.vhd"
             vm_type="Windows7"
             ;;
-        9) 
+        9)
             urls=`echo http://download.microsoft.com/download/B/7/2/B72085AE-0F04-4C6F-9182-BF1EE90F5273/Windows_7_IE9.part0{1.exe,2.rar,3.rar,4.rar,5.rar,6.rar,7.rar}`
             vhd="Windows 7.vhd"
             vm_type="Windows7"
@@ -243,14 +243,14 @@ build_ievm() {
     log "Checking for existing VM called ${vm_name}"
     if VBoxManage showvminfo "${vm_name}" >/dev/null 2> /dev/null
     then
-        fail "VM called ${vm_name} already exists"        
+        fail "VM called ${vm_name} already exists"
     else
 
         case $kernel in
             Darwin) ga_iso="/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso" ;;
             Linux) ga_iso="/usr/share/virtualbox/VBoxGuestAdditions.iso" ;;
         esac
- 
+
         if [[ ! -f "${ga_iso}" ]]
         then
             check_version
@@ -271,14 +271,14 @@ build_ievm() {
         VBoxManage createvm --name "${vm_name}" --ostype "${vm_type}" --register
         VBoxManage modifyvm "${vm_name}" --memory 256 --vram 32
         VBoxManage storagectl "${vm_name}" --name "IDE Controller" --add ide --controller PIIX4 --bootable on
-        
+
         log "Copying ${vhd_path}/${vhd} to ${vbox_machinefolder}/${vm_name}/${vhd}"
         cp "${vhd_path}/${vhd}" "${vbox_machinefolder}/${vm_name}/${vhd}"
         VBoxManage internalcommands sethduuid "${vbox_machinefolder}/${vm_name}/${vhd}"
         VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium "${vbox_machinefolder}/${vm_name}/${vhd}"
-        
+
         VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 0 --device 1 --type dvddrive --medium "${ga_iso}"
-        
+
         VBoxManage modifyvm "${vm_name}" --nic2 hostonly
         VBoxManage modifyvm "${vm_name}" --hostonlyadapter2 "vboxnet0"
         VBoxManage modifyvm "${vm_name}" --clipboard bidirectional
@@ -330,7 +330,7 @@ build_and_attach_drivers() {
     if [[ ! -f "${iebox_home}/drivers.iso" ]]
     then
       log "Writing drivers ISO"
-      
+
       case $kernel in
           Darwin) hdiutil makehybrid "${iebox_home}/drivers" -o "${iebox_home}/drivers.iso" ;;
           Linux) mkisofs -o "${iebox_home}/drivers.iso" "${iebox_home}/drivers" ;;
@@ -338,7 +338,7 @@ build_and_attach_drivers() {
     fi
 
     VBoxManage storageattach "${vm_name}" --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium "${iebox_home}/drivers.iso"
-    
+
     log "!! Don't forget to install the drivers on first boot !!"
 }
 
