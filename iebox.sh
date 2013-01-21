@@ -294,14 +294,11 @@ build_ievm_ie6() {
     if [[ ! -f "${iebox_home}/drivers/PRO2KXP.exe" ]]
     then
         download_driver "http://downloadmirror.intel.com/8659/eng/PRO2KXP.exe"
+    fi
 
-        if [[ ! -f "${iebox_home}/drivers/autorun.inf" ]]
-        then
-            cd "${iebox_home}/drivers"
-            echo '[autorun]' > autorun.inf
-            echo 'open=PRO2KXP.exe' >> autorun.inf
-            cd "${iebox_home}"
-        fi
+    if [[ ! -f "${iebox_home}/drivers/WindowsXP-KB2592799-x86-ENU.exe" ]]
+    then
+        download_driver "http://download.microsoft.com/download/4/F/4/4F49D797-3D62-43B2-ADC5-78EEE96AE740/WindowsXP-KB2592799-x86-ENU.exe"
     fi
 
     log "Changing network adapter to 82540EM"
