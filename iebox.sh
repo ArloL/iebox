@@ -114,17 +114,15 @@ check_ext_pack() {
     fi
 }
 
+check_unrar() {
+    PATH="${PATH}:${iebox_home}/rar"
+    hash unrar 2>/dev/null || install_unrar
+}
+
 install_unrar() {
     case $kernel in
         Darwin) download_unrar ;;
         Linux) fail "Linux support requires unrar (sudo apt-get install for Ubuntu/Debian)" ;;
-    esac
-}
-
-install_cabextract() {
-    case $kernel in
-        Darwin) download_cabextract ;;
-        Linux) fail "Linux support requires cabextract (sudo apt-get install for Ubuntu/Debian)" ;;
     esac
 }
 
@@ -145,6 +143,18 @@ download_unrar() {
     fi
 
     hash unrar 2>/dev/null || fail "Could not find unrar in ${iebox_home}/rar/"
+}
+
+check_cabextract() {
+    PATH="${PATH}:${iebox_home}/cabextract/cabextractinstall.pkg/usr/local/bin"
+    hash cabextract 2>/dev/null || install_cabextract
+}
+
+install_cabextract() {
+    case $kernel in
+        Darwin) download_cabextract ;;
+        Linux) fail "Linux support requires cabextract (sudo apt-get install for Ubuntu/Debian)" ;;
+    esac
 }
 
 download_cabextract() {
@@ -168,16 +178,6 @@ download_cabextract() {
     gzcat Payload | cpio -i --quiet
     cd "${iebox_home}"
     hash cabextract 2>/dev/null || fail "Could not find cabextract in ${iebox_home}/cabextract/cabextractinstall.pkg/usr/local/bin"
-}
-
-check_unrar() {
-    PATH="${PATH}:${iebox_home}/rar"
-    hash unrar 2>/dev/null || install_unrar
-}
-
-check_cabextract() {
-    PATH="${PATH}:${iebox_home}/cabextract/cabextractinstall.pkg/usr/local/bin"
-    hash cabextract 2>/dev/null || install_cabextract
 }
 
 build_ievm() {
