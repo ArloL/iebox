@@ -38,14 +38,6 @@ check_parameters() {
     vm_name=${param_name:-$def_vm_name}
 }
 
-create_home() {
-    def_iebox_home="${HOME}/.iebox"
-    iebox_home=${param_download:-$def_iebox_home}
-
-    mkdir -p "${iebox_home}"
-    cd "${iebox_home}"
-}
-
 check_system() {
     # Check for supported system
     kernel=`uname -s`
@@ -53,6 +45,14 @@ check_system() {
         Darwin|Linux) ;;
         *) fail "Sorry, $kernel is not supported." ;;
     esac
+}
+
+create_home() {
+    def_iebox_home="${HOME}/.iebox"
+    iebox_home=${param_download:-$def_iebox_home}
+
+    mkdir -p "${iebox_home}"
+    cd "${iebox_home}"
 }
 
 check_virtualbox() {
