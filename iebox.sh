@@ -12,12 +12,12 @@ fail() { log "\nERROR: $*\n" ; exit 1 ; }
 
 usage() {
 cat << EOF
-usage: $0 options
+Usage:  $0 [options]
 
-OPTIONS:
-   -h      Show this message
-   -n      Set the name of the virtual machine
-   -v      Choose the version
+Options:
+        -h  Show this message.
+        -v  Choose the version of the VM.
+        -n  Set the name of the VM.
 EOF
 }
 
