@@ -352,13 +352,13 @@ while getopts "hn:v:c:d:" opt; do
   d) param_download=$OPTARG ;;
   h)
     usage
-    exit 1
+    exit 0
     ;;
   n) param_name=$OPTARG ;;
   v) param_version=$OPTARG ;;
   ?)
     usage
-    exit 1
+    exit 0
     ;;
   esac
 done
