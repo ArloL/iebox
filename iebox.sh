@@ -367,7 +367,7 @@ if [[ -z $param_version ]]
 then
   log "Missing version parameter\n"
   usage
-exit 1
+  exit 1
 fi
 
 check_parameters
