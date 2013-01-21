@@ -346,7 +346,7 @@ param_name=
 param_version=
 param_curl=
 param_download=
-while getopts "hn:v:c:d:" opt; do
+while getopts "h?n:v:c:d:" opt; do
   case $opt in
   c) param_curl=$OPTARG ;;
   d) param_download=$OPTARG ;;
