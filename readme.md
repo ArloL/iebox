@@ -6,6 +6,10 @@ and OS&nbsp;X using [VirtualBox](http://virtualbox.org/).
 
 It is a fork of [ievms](http://xdissent.github.com/ievms/).
 
+## Note
+
+Microsoft has released official VMs for VirtualBox: <http://www.modern.ie/virtualization-tools>.
+
 ## Motivation
 
 [Microsoft](https://www.microsoft.com) provides *free* [virtual
